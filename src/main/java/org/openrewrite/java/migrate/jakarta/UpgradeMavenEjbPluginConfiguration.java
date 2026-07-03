@@ -38,17 +38,11 @@ import org.openrewrite.xml.tree.Xml;
 public class UpgradeMavenEjbPluginConfiguration extends Recipe {
 
 
-    @Override
-    public String getDisplayName() {
-        return "Set `maven-ejb-plugin` ejbVersion to 4.0";
-    }
+    String displayName = "Set `maven-ejb-plugin` ejbVersion to 4.0";
 
-    @Override
-    public String getDescription() {
-        return "Updates the `<ejbVersion>` configuration of `maven-ejb-plugin` to `4.0` when the current value " +
-               "(or its resolved Maven property) indicates EJB 3.x. Handles the common pattern where `<ejbVersion>` " +
-               "is coupled to the `javax.ejb-api` dependency version via a shared property, decoupling them after migration.";
-    }
+    String description = "Updates the `<ejbVersion>` configuration of `maven-ejb-plugin` to `4.0` when the current value " +
+            "(or its resolved Maven property) indicates EJB 3.x. Handles the common pattern where `<ejbVersion>` " +
+            "is coupled to the `javax.ejb-api` dependency version via a shared property, decoupling them after migration.";
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {

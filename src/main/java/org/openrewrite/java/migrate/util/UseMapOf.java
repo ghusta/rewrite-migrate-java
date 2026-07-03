@@ -32,16 +32,10 @@ import org.openrewrite.java.tree.J;
 import org.openrewrite.java.tree.Statement;
 import org.openrewrite.java.tree.TypeUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringJoiner;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static java.util.Collections.singletonList;
 
 public class UseMapOf extends Recipe {
     private static final MethodMatcher NEW_HASH_MAP = new MethodMatcher("java.util.HashMap <constructor>()", true);
@@ -197,7 +191,7 @@ public class UseMapOf extends Recipe {
                             }
                             withPrefixes.add(arg);
                         }
-                        return nc.withArguments(Collections.singletonList(mapCall.withArguments(withPrefixes)));
+                        return nc.withArguments(singletonList(mapCall.withArguments(withPrefixes)));
                     }
 
                     /**
@@ -338,7 +332,7 @@ public class UseMapOf extends Recipe {
                             return null;
                         }
                         for (Expression arg : mi.getArguments()) {
-                            if (arg instanceof J.Literal && ((J.Literal) arg).getValue() == null) {
+                            if (J.Literal.isLiteralValue( arg, null )) {
                                 return null;
                             }
                         }

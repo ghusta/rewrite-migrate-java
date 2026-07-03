@@ -124,11 +124,11 @@ class JavaxEjbToJakartaEjbTest implements RewriteTest {
                 assertThat(pom)
                   .doesNotContain("javax.ejb")
                   .contains("jakarta.ejb-api");
-                assertThat(pom).containsPattern("<jee\\.ejb\\.api>4\\.0\\.");
-
-                // maven-ejb-plugin version property updated to 3.2.1 or higher
-                // (UpgradePluginVersion updates the property value; the tag still holds ${maven.ejb.version})
-                assertThat(pom).containsPattern("<maven\\.ejb\\.version>3\\.2\\.[1-9]");
+                assertThat(pom)
+                        .containsPattern("<jee\\.ejb\\.api>4\\.0\\.")
+                        // maven-ejb-plugin version property updated to 3.2.1 or higher
+                        // (UpgradePluginVersion updates the property value; the tag still holds ${maven.ejb.version})
+                        .containsPattern("<maven\\.ejb\\.version>3\\.2\\.[1-9]");
 
                 // ejbVersion must be the literal "4.0" — decoupled from ${jee.ejb.api}.
                 // If it were still ${jee.ejb.api}, a future bump of that property would silently
