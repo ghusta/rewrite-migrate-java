@@ -9193,6 +9193,34 @@ examples:
     language: java
 ---
 type: specs.openrewrite.org/v1beta/example
+recipeName: org.openrewrite.java.migrate.nio.file.RedundantUtf8Charset
+examples:
+- description: '`RedundantUtf8CharsetTest#readString`'
+  sources:
+  - before: |
+      import java.io.IOException;
+      import java.nio.charset.StandardCharsets;
+      import java.nio.file.Files;
+      import java.nio.file.Path;
+
+      class Test {
+          String read(Path path) throws IOException {
+              return Files.readString(path, StandardCharsets.UTF_8);
+          }
+      }
+    after: |
+      import java.io.IOException;
+      import java.nio.file.Files;
+      import java.nio.file.Path;
+
+      class Test {
+          String read(Path path) throws IOException {
+              return Files.readString(path);
+          }
+      }
+    language: java
+---
+type: specs.openrewrite.org/v1beta/example
 recipeName: org.openrewrite.java.migrate.search.AboutJavaVersion
 examples:
 - description: '`AboutJavaVersionTest#aboutJavaVersion`'
